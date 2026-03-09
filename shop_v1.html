@@ -1579,7 +1579,7 @@ async function sendMessage() {
 
   let reply;
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch('https://klair.vercel.app/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
