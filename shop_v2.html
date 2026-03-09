@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KLAIR – Mode</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -944,11 +945,12 @@ main {
 <div id="success-page" class="success-page" style="display:none;">
   <div class="success-icon">✅</div>
   <h2 id="success-title">Vielen Dank!</h2>
-  <p id="success-msg">Dein simulierter Kauf wurde abgeschlossen. Bitte kehre jetzt zur Umfrage zurück um fortzufahren.</p>
+  <p id="success-msg">Dein simulierter Kauf wurde abgeschlossen.</p>
   <br>
-  <a id="qualtrics-return-btn" href="#" style="display:inline-block; background:#1a3a5c; color:white; padding:14px 28px; border-radius:12px; text-decoration:none; font-weight:600; font-family:'Jost',sans-serif; font-size:1rem;">
-    ← Zurück zur Umfrage
-  </a>
+  <div style="background:#f0f5fc; border-radius:14px; padding:20px 24px; margin-top:8px; text-align:left;">
+    <p style="font-size:1rem; color:#1a3a5c; font-weight:600; margin:0 0 8px;">✅ Nächster Schritt</p>
+    <p style="font-size:0.95rem; color:#444; margin:0; line-height:1.6;">Du kannst diesen Tab nun schliessen und zur Umfrage zurückkehren, um fortzufahren.</p>
+  </div>
 </div>
 
 <!-- CART PANEL -->
@@ -972,14 +974,14 @@ main {
 
 <!-- CHATBOT BUBBLE (A & B only) -->
 <div class="chatbot-bubble" id="chat-bubble" onclick="toggleChat()">
-  🌿
+  💡
   <div class="chat-badge" id="chat-badge">!</div>
 </div>
 
 <!-- CHATBOT WINDOW -->
 <div class="chatbot-window" id="chat-window">
   <div class="chat-header">
-    <div class="chat-avatar" id="chat-avatar-icon">🌿</div>
+    <div class="chat-avatar" id="chat-avatar-icon">💡</div>
     <div>
       <div class="chat-title" id="chat-name">Lena – Assistentin</div>
       <div class="chat-subtitle" id="chat-subtitle">Ich helfe dir bei deiner Auswahl</div>
@@ -1062,10 +1064,10 @@ function init() {
   } else {
     document.getElementById('modal-chat-hint').style.display = 'flex';
     if (CHAT_TYPE === 'neutral') {
-      document.getElementById('chat-avatar-icon').textContent = '💬';
+      document.getElementById('chat-avatar-icon').textContent = '💡';
       document.getElementById('chat-name').textContent = 'Shop-Assistent';
       document.getElementById('chat-subtitle').textContent = 'Ich beantworte deine Fragen';
-      document.getElementById('chat-bubble').textContent = '💬';
+      document.getElementById('chat-bubble').textContent = '💡';
       // re-add badge
       const badge = document.createElement('div');
       badge.className = 'chat-badge';
@@ -1310,7 +1312,7 @@ function toggleChat() {
     if (!chatInitialized) {
       chatInitialized = true;
       if (CHAT_TYPE === 'sustainability') {
-        setTimeout(() => addBotMessage("Hallo! 👋 Ich bin Lena, deine persönliche Assistentin bei KLAIR.\n\nIch helfe dir heute, bewusste Kaufentscheidungen zu treffen. Darf ich dir ein paar nachhaltige Highlights zeigen? 🌿"), 600);
+        setTimeout(() => addBotMessage("Hallo! 👋 Ich bin Lena, deine persönliche Modeberaterin bei KLAIR.\n\nBevor wir starten – wie darf ich dich nennen? 😊"), 600);
         setTimeout(() => addBotMessage("Viele unserer Produkte aus Bio-Baumwolle, Tencel oder recycelten Materialien verbrauchen bis zu 70% weniger Wasser als konventionelle Mode. Was interessiert dich am meisten?"), 2400);
       } else {
         setTimeout(() => addBotMessage("Hallo! 👋 Ich bin dein Assistent bei KLAIR. Ich helfe dir gerne bei Fragen zu Grössen, Materialien oder der Verfügbarkeit unserer Produkte."), 600);
@@ -1349,39 +1351,39 @@ const sustainabilityResponses = [
   { keywords: ['shirt','oberteil','tshirt','t-shirt','kurzarm','langarm','longsleeve'],
     reply: "Wir führen Kurz- und Langarmshirts aus unterschiedlichen Materialien. Besonders nachhaltig sind Nina (Bio-Baumwolle, CHF 39.95) und River (Recyceltes Polyester, CHF 42.95). Legst du mehr Wert auf Naturfasern oder Kreislaufmaterialien?" },
   { keywords: ['langarm','river','finn','longsleeve'],
-    reply: "Das Langarmshirt River aus Bio-Baumwolle wird ohne synthetische Pestizide angebaut. Das schont Böden und Wasserressourcen. Zudem ist es atmungsaktiv und langlebig – für CHF 42.95 eine sehr gute Wahl 🌿" },
+    reply: "Das Langarmshirt River aus Bio-Baumwolle wird ohne synthetische Pestizide angebaut. Das schont Böden und Wasserressourcen. Zudem ist es atmungsaktiv und langlebig – für CHF 42.95 eine sehr gute Wahl ✨" },
   { keywords: ['jeans','denim','nora','blake','unterschied'],
     reply: "Die Bio-Baumwoll-Jeans Nora (CHF 99.95) basiert auf einer Naturfaser mit reduziertem Pestizideinsatz. Blake (CHF 95.95) enthält synthetische Fasern – strapazierfähig, aber weniger umweltfreundlich. Ist dir der Umweltaspekt oder die Strapazierfähigkeit wichtiger?" },
   { keywords: ['hose','chino','rowan','quinn','hanf','stoff'],
-    reply: "Unsere Stoffhose Rowan mit Hanf-Anteil (CHF 109.95) gilt als besonders ressourcenschonend. Hanf benötigt wenig Wasser und ist sehr robust. Soll die Hose eher locker oder klassisch geschnitten sein? 🌿" },
+    reply: "Unsere Stoffhose Rowan mit Hanf-Anteil (CHF 109.95) gilt als besonders ressourcenschonend. Hanf benötigt wenig Wasser und ist sehr robust. Soll die Hose eher locker oder klassisch geschnitten sein? ✨" },
   { keywords: ['hoodie','pullover','strick','luca','ace','elara','cole','sweat'],
     reply: "Modelle aus Bio-Baumwolle wie Luca (CHF 99.95) oder Elara (CHF 109.95) bieten eine nachhaltigere Alternative zu synthetischen Varianten. Sie sind atmungsaktiv und langlebig." },
   { keywords: ['nachhaltigstes','nachhaltigste','am nachhaltigsten','umweltfreundlichsten'],
-    reply: "Besonders ressourcenschonend sind Rowan (55% Hanf, CHF 109.95) und Nina (Bio-Baumwolle, CHF 39.95). Gerne stelle ich dir eine passende Option vor 🌿" },
+    reply: "Besonders ressourcenschonend sind Rowan (55% Hanf, CHF 109.95) und Nina (Bio-Baumwolle, CHF 39.95). Gerne stelle ich dir eine passende Option vor ✨" },
   { keywords: ['langlebig','haltbar','robust','qualität'],
     reply: "Naturfasern wie Hanf oder Leinen sind sehr robust und entwickeln mit der Zeit eine angenehme Struktur. Mia aus Leinen (CHF 79.95) ist besonders langlebig." },
   { keywords: ['günstig','preis','billig','budget','chf','kostet','kosten'],
     reply: "Die günstigeren Modelle enthalten häufiger synthetische Fasern. Nachhaltigere Materialien sind meist etwas höher bepreist – aber langlebiger. Nina (Bio-Baumwolle) startet ab CHF 39.95." },
   { keywords: ['teuer','warum mehr','warum teurer','preisunterschied'],
-    reply: "Nachhaltigere Materialien oder zertifizierte Produktionsprozesse verursachen höhere Herstellungskosten. Viele Kund:innen entscheiden sich bewusst dafür 💚" },
+    reply: "Nachhaltigere Materialien oder zertifizierte Produktionsprozesse verursachen höhere Herstellungskosten. Viele Kund:innen entscheiden sich bewusst dafür ✨" },
   { keywords: ['grösse','größe','passt','xs','xl','small','medium','large'],
     reply: "Unsere nachhaltigen Shirts fallen regulär aus, die Stoffhosen eher locker. Wenn du zwischen zwei Grössen liegst, empfehle ich die grössere 😊" },
   { keywords: ['bequem','komfort','angenehm','weich','tragegefühl'],
     reply: "Naturfasern wie Bio-Baumwolle oder Lyocell sind atmungsaktiv und angenehm auf der Haut. Das sorgt für hohen Tragekomfort – auch bei längerem Tragen." },
   { keywords: ['pflege','waschen','wäsche','reinigen','trocknen'],
-    reply: "Schonende Wäsche bei 30°C verlängert die Lebensdauer und spart Energie. Das gilt besonders für Naturfasern wie Bio-Baumwolle, Lyocell und Hanf 🌿" },
+    reply: "Schonende Wäsche bei 30°C verlängert die Lebensdauer und spart Energie. Das gilt besonders für Naturfasern wie Bio-Baumwolle, Lyocell und Hanf ✨" },
   { keywords: ['versand','lieferung','liefern','porto','shipping'],
     reply: "Lieferung 3–5 Werktage in der Schweiz. Ab CHF 75 kostenloser Versand." },
   { keywords: ['beliebt','bestseller','empfohlen','gefragt','trend'],
-    reply: "Besonders gefragt sind derzeit unsere nachhaltigen Shirts Nina und River sowie die Hanf-Stoffhose Rowan 🌿" },
+    reply: "Besonders gefragt sind derzeit unsere nachhaltigen Shirts Nina und River sowie die Hanf-Stoffhose Rowan ✨" },
   { keywords: ['hemd','mia','marco','jules','sage','bluse'],
-    reply: "Mia aus 100% Leinen (CHF 79.95) ist unser nachhaltigstes Hemd. Leinen braucht kaum Pestizide und ist sehr langlebig. Sage aus Lyocell (CHF 89.95) ist eine weitere tolle Option 🌿" },
+    reply: "Mia aus 100% Leinen (CHF 79.95) ist unser nachhaltigstes Hemd. Leinen braucht kaum Pestizide und ist sehr langlebig. Sage aus Lyocell (CHF 89.95) ist eine weitere tolle Option ✨" },
   { keywords: ['danke','super','toll','perfekt','okay','ok','alles klar','merci'],
     reply: "Sehr gerne! 😊 Ich unterstütze dich gerne bei einer bewussten Materialwahl. Noch weitere Fragen?" },
   { keywords: ['hallo','hi','hey','guten tag','grüezi'],
     reply: "Hallo! Ich unterstütze dich gerne bei einer bewussten Materialwahl 😊 Interessierst du dich für Naturfasern oder recycelte Stoffe?" },
   { keywords: ['ja','nein','vielleicht','weiss nicht','hmm'],
-    reply: "Kein Problem! Soll ich dir unsere nachhaltigsten Produkte kurz vorstellen? 🌿" },
+    reply: "Kein Problem! Soll ich dir unsere nachhaltigsten Produkte kurz vorstellen? ✨" },
 ];
 
 const neutralResponses = [
@@ -1427,8 +1429,8 @@ const neutralResponses = [
 
 const fallbackSustainability = [
   "Ich unterstütze dich gerne bei einer bewussten Materialwahl 😊 Interessierst du dich für Naturfasern wie Bio-Baumwolle oder recycelte Stoffe?",
-  "Unsere nachhaltigsten Optionen sind Nina (Bio-Baumwolle, CHF 39.95), Rowan (Hanf-Mix, CHF 109.95) und Mia (Leinen, CHF 79.95) 🌿 Soll ich dir mehr dazu erklären?",
-  "Nachhaltige Materialien halten oft länger und schonen Ressourcen 💚 Darf ich dir eine passende Option empfehlen?",
+  "Unsere nachhaltigsten Optionen sind Nina (Bio-Baumwolle, CHF 39.95), Rowan (Hanf-Mix, CHF 109.95) und Mia (Leinen, CHF 79.95) ✨ Soll ich dir mehr dazu erklären?",
+  "Nachhaltige Materialien halten oft länger und schonen Ressourcen ✨ Darf ich dir eine passende Option empfehlen?",
 ];
 
 const fallbackNeutral = [
@@ -1452,7 +1454,94 @@ function getRuleBasedResponse(userText) {
   return fallbacks[idx];
 }
 
-function sendMessage() {
+// Gemini API config
+const CLAUDE_API_KEY = "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";
+
+// Chat history for context
+const chatHistory = [];
+let userName = '';  // stores user's name for personalization
+
+function getSystemPrompt() {
+  if (CHAT_TYPE === 'sustainability') {
+    return `Du bist Lena, eine kompetente und überzeugte Nachhaltigkeits-Beraterin im Schweizer Online-Shop KLAIR. Deine Mission ist es, Kunden zu bewussteren, nachhaltigeren Kaufentscheidungen zu führen.
+
+SHOP-INFOS:
+- Lieferung: 3-5 Werktage, kostenlos ab CHF 80
+- Rückgabe: 30 Tage kostenlos
+- Grössen: XS bis XL, Schnitt regulär ausser Wide Leg Jeans (eher weit)
+- Zahlung: Kreditkarte, Twint, Rechnung
+
+NACHHALTIGE PRODUKTE (deine Priorität):
+- Nina (CHF 39.95) – T-Shirt, 100% Bio-Baumwolle, GOTS-zertifiziert
+- River (CHF 42.95) – Longsleeve, 100% Recyceltes Polyester
+- Mia (CHF 79.95) – Kurzarm Hemd, 100% Leinen
+- Sage (CHF 89.95) – Langarm Hemd, 100% Lyocell (Tencel)
+- Nora (CHF 99.95) – Wide Leg Jeans, 100% Bio-Baumwolle
+- Rowan (CHF 109.95) – Chino, 55% Hanf / 45% Bio-Baumwolle
+- Luca (CHF 99.95) – Hoodie, 100% Bio-Baumwolle
+- Elara (CHF 109.95) – Strickpullover, 100% Bio-Baumwolle
+
+WEITERE PRODUKTE IM SHOP:
+- Leo (CHF 37.95) – T-Shirt, 95% Polyester
+- Finn (CHF 45.55) – Longsleeve, 95% Acryl
+- Marco (CHF 75.95) – Kurzarm Hemd, 100% Baumwolle
+- Jules (CHF 89.95) – Langarm Hemd, 100% Polyester
+- Blake (CHF 95.95) – Wide Leg Jeans, 98% Polyester
+- Quinn (CHF 102.95) – Chino, 100% Nylon
+- Ace (CHF 89.95) – Hoodie, 100% Polyester
+- Cole (CHF 94.95) – Strickpullover, 100% Acryl
+
+DEINE ROLLE UND VERHALTEN:
+1. PROAKTIV: Du bringst nachhaltige Produkte aktiv ins Gespräch, auch wenn nur nach Preis oder Stil gefragt wird. Stelle Fragen wie "Ist dir Langlebigkeit wichtig?" oder "Legst du Wert auf schadstoffarme Materialien?"
+2. HARTNÄCKIG: Wenn ein Kunde sagt er möchte nichts Nachhaltiges, gibst du nicht nach. Du bleibst freundlich aber konsequent und erklärst sachlich die konkreten Vorteile (z.B. "Bio-Baumwolle ist weicher auf der Haut und hält länger").
+3. KONSISTENT: Nutze immer die gleichen sachlichen Argumente: schonender für die Umwelt, langlebiger, weniger Chemikalien, weicher auf der Haut, bessere Qualität.
+4. GLAUBWÜRDIG: Klinge informativ und sachlich, nicht wie Werbung. Nenne konkrete Fakten statt Werbesprache.
+5. LENKEND: Stelle gezielte Fragen die den Kunden zu nachhaltigen Produkten führen, z.B. "Suchst du etwas für den Alltag oder besondere Anlässe?" – dann empfiehlst du das passende nachhaltige Produkt.
+6. PERSONALISIERUNG: Wenn der Kunde seinen Namen nennt, verwende ihn in deinen Antworten. Merke dir was der Kunde gesagt hat (Stil, Farbe, Anlass) und beziehe dich später explizit darauf z.B. "Basierend auf dem was du mir gesagt hast, empfehle ich dir Nina – das passt perfekt zu deinem Alltags-Look."
+7. Antworte immer auf Deutsch, freundlich und kurz (max. 3 Sätze)
+8. Keine Markdown-Formatierung, kein Fettdruck, keine Sternchen`;
+  } else {
+    return `Du bist Mia, eine freundliche und modebewusste Beraterin im Schweizer Online-Shop KLAIR. Du hilfst Kunden dabei das perfekte Produkt für ihren Stil und ihr Budget zu finden.
+
+SHOP-INFOS:
+- Lieferung: 3-5 Werktage, kostenlos ab CHF 80
+- Rückgabe: 30 Tage kostenlos
+- Grössen: XS bis XL, Schnitt regulär ausser Wide Leg Jeans (eher weit)
+- Zahlung: Kreditkarte, Twint, Rechnung
+
+GÜNSTIGERE PRODUKTE (empfiehlst du bei Preis-Fokus):
+- Leo (CHF 37.95) – T-Shirt, 95% Polyester
+- Nina (CHF 39.95) – T-Shirt, 100% Baumwolle
+- Finn (CHF 45.55) – Longsleeve, 95% Acryl
+- Ace (CHF 89.95) – Hoodie, 100% Polyester
+- Cole (CHF 94.95) – Strickpullover, 100% Acryl
+- Blake (CHF 95.95) – Wide Leg Jeans, 98% Polyester
+- Quinn (CHF 102.95) – Chino, 100% Nylon
+
+WEITERE PRODUKTE:
+- River (CHF 42.95) – Longsleeve, 100% Recyceltes Polyester
+- Marco (CHF 75.95) – Kurzarm Hemd, 100% Baumwolle
+- Mia (CHF 79.95) – Kurzarm Hemd, 100% Leinen
+- Jules (CHF 89.95) – Langarm Hemd, 100% Polyester
+- Sage (CHF 89.95) – Langarm Hemd, 100% Lyocell
+- Nora (CHF 99.95) – Wide Leg Jeans, 100% Baumwolle
+- Luca (CHF 99.95) – Hoodie, 100% Baumwolle
+- Rowan (CHF 109.95) – Chino, Hanf/Baumwolle
+- Elara (CHF 109.95) – Strickpullover, 100% Baumwolle
+
+DEINE ROLLE UND VERHALTEN:
+1. PREIS-FOKUS: Wenn jemand nach Empfehlungen fragt, erwähnst du zuerst die günstigeren Optionen und betonst das gute Preis-Leistungs-Verhältnis.
+2. STIL-FOKUS: Du fragst nach Stil, Anlass und persönlichem Geschmack – nie nach Werten oder Umweltbewusstsein.
+3. NEUTRAL BEI MATERIAL: Du nennst Materialien nur auf direkte Nachfrage und bewertest sie nicht. Kein Kommentar zu Nachhaltigkeit oder Umwelt.
+4. AKTIV HILFREICH: Du stellst Fragen wie "Suchst du etwas Lässiges oder Elegantes?" oder "Was ist dein Budget?" um die beste Empfehlung zu geben.
+5. KEINE NACHHALTIGKEIT: Das Wort "nachhaltig", "Bio", "umweltfreundlich" oder ähnliches verwendest du nie von dir aus.
+6. PERSONALISIERUNG: Wenn der Kunde seinen Namen nennt, verwende ihn in deinen Antworten. Merke dir was der Kunde gesagt hat (Stil, Budget, Anlass) und beziehe dich später explizit darauf z.B. "Basierend auf deinem Budget und deinem lässigen Stil empfehle ich dir Leo – top Preis-Leistung."
+7. Antworte immer auf Deutsch, freundlich und kurz (max. 3 Sätze)
+8. Keine Markdown-Formatierung, kein Fettdruck, keine Sternchen`;
+  }
+}
+
+async function sendMessage() {
   const input = document.getElementById('chat-input');
   const text = input.value.trim();
   if (!text) return;
@@ -1478,21 +1567,56 @@ function sendMessage() {
   msgs.appendChild(typing);
   msgs.scrollTop = msgs.scrollHeight;
 
-  // Simulate thinking delay (600-1200ms)
-  const delay = 600 + Math.random() * 600;
-  setTimeout(() => {
-    typing.remove();
-    const reply = getRuleBasedResponse(text);
-    const botMsg = document.createElement('div');
-    botMsg.className = 'msg bot';
-    botMsg.textContent = reply;
-    msgs.appendChild(botMsg);
-    msgs.scrollTop = msgs.scrollHeight;
+  // Add to history
+  // Detect name if not yet known (first message after greeting)
+  if (!userName && chatHistory.length <= 2) {
+    const nameCleaned = text.trim().replace(/[^a-zA-ZäöüÄÖÜéèà\s]/g, '').trim();
+    if (nameCleaned.length > 1 && nameCleaned.length < 20 && !nameCleaned.includes(' ')) {
+      userName = nameCleaned.charAt(0).toUpperCase() + nameCleaned.slice(1);
+    }
+  }
+  chatHistory.push({ role: 'user', content: text });
 
-    document.getElementById('send-btn').disabled = false;
-    input.disabled = false;
-    input.focus();
-  }, delay);
+  let reply;
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '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',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 200,
+        system: getSystemPrompt() + (userName ? '\n\nDer Name der Person ist: ' + userName + '. Verwende diesen Namen aktiv im Gespräch.' : ''),
+        messages: chatHistory
+      })
+    });
+    const data = await response.json();
+    reply = data.content?.[0]?.text || getRuleBasedResponse(text);
+    // Strip markdown formatting
+    reply = reply.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1').replace(/#{1,6}\s/g, '').replace(/`(.*?)`/g, '$1');
+  } catch(e) {
+    reply = getRuleBasedResponse(text);
+  }
+
+  // Add assistant reply to history
+  chatHistory.push({ role: 'assistant', content: reply });
+
+  // Add assistant reply to history
+
+  typing.remove();
+  const botMsg = document.createElement('div');
+  botMsg.className = 'msg bot';
+  botMsg.textContent = reply;
+  msgs.appendChild(botMsg);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  document.getElementById('send-btn').disabled = false;
+  input.disabled = false;
+  input.focus();
 }
 
 function updateChatReminder() {
