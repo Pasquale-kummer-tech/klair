@@ -1286,7 +1286,7 @@ function confirmOrder() {
   document.getElementById('return-code').textContent = RESPONSE_ID;
 
   // Show return button if Qualtrics URL is configured
-  if (QUALTRICS_URL) {
+  if (QUALTRICS_URL !== 'https://immzhaw.eu.qualtrics.com/jfe/form/SV_ahgBmhjrb1wDr14') {
     const btn = document.getElementById('qualtrics-return-btn');
     btn.href = QUALTRICS_URL + '?' + returnParams.toString();
     btn.style.display = 'inline-block';
@@ -1579,13 +1579,10 @@ async function sendMessage() {
 
   let reply;
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://klair-ruddy.vercel.app/api/chat', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': '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',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
