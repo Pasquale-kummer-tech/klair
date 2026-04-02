@@ -1608,7 +1608,7 @@ async function sendMessage() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
+        model: 'claude-sonnet-4-6',
         max_tokens: 200,
         system: getSystemPrompt() + (userName ? '\n\nDer Name der Person ist: ' + userName + '. Verwende diesen Namen aktiv im Gespräch.' : ''),
         messages: chatHistory
